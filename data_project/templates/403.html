@@ -1,0 +1,16 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+	Forbidden
+{% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+	<div class="container d-flex vh-100 justify-content-center align-items-md-center">
+        <div class="content">
+            <h1 class="text-black-50" style="font-size: 200px">403</h1>
+            <p class="text-danger">You are forbidden from accessing this page</p>
+            <a href= "{% url 'home' %}" class="btn btn-dark">Go Home</a>
+        </div>
+    </div>
+{% endblock %}

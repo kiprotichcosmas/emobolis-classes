@@ -1,0 +1,41 @@
+{% extends 'base_template.html' %}
+{% load humanize %}
+
+{% block title %}
+	{{ employee.name }}
+{% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' %}
+	<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-5">
+        {% include 'alerts.html' %}
+          <div class="card">
+              {% if employee.profile %}
+                  <img src="{{ employee.profile.url }}" height="150" width="250" alt="" class="card-img-top">
+              {% endif %}
+              <div class="card-body">
+                      <h2 class="cart-title">Name:{{employee.name}}</h2>
+                      <p class="card-text">Email: {{ employee.email }}</p>
+                      <p class="card-text">Date of Birth: {{ employee.dob }}</p>
+                      <p class="card-text">Salary: {{ employee.salary | intcomma }}</p>
+                      <p class="card-text">Created At: {{ employee.created_at }}</p>
+                      <p class="card-text">Updated At: {{ employee.updated_at | naturaltime}}</p>
+
+     {# add, change, view, delete permissions check #}
+                  {% if perms.main_app.delete_employee %}
+                      <a href="{% url 'delete' employee.id %}" class="btn btn-danger w-50">Delete</a> <br>
+
+                  {% endif %}
+                  {% if perms.main_app.change_employee %}
+                    <a href="{% url 'update' employee.id %}" class="btn btn-success w-50 mt-3">Update</a>
+                  {% endif %}
+
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
